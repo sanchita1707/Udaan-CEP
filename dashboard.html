@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard – Udaan</title>
+  <meta name="description" content="Track your learning progress, quiz scores and activities on Udaan's student dashboard." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
+        <span>Udaan</span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="learning.html" class="nav-link">📚 Learning Hub</a></li>
+        <li><a href="activities.html" class="nav-link">🎮 Activities</a></li>
+        <li><a href="quiz.html" class="nav-link">❓ Quiz</a></li>
+        <li><a href="feedback.html" class="nav-link">💬 Feedback</a></li>
+        <li><a href="dashboard.html" class="nav-link" id="nav-dashboard-link">👤 Dashboard</a></li>
+        <li><a href="#" class="nav-link" id="nav-logout-link" onclick="logout(); return false;">🚪 Logout</a></li>
+        <li><a href="login.html" class="nav-link btn-login d-none" id="nav-login-link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- DASHBOARD CONTENT -->
+  <div class="dashboard-section">
+
+    <!-- Dashboard Header / Welcome Banner -->
+    <div class="dashboard-header">
+      <div class="container">
+        <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+          <!-- Avatar -->
+          <div id="dashboard-avatar" style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.75rem;font-weight:800;color:white;border:3px solid rgba(255,255,255,0.4);flex-shrink:0;">?</div>
+          <div>
+            <h1 id="dashboard-name" style="color:white;font-size:1.6rem;margin-bottom:0.2rem;">Loading...</h1>
+            <p id="dashboard-email" style="color:rgba(255,255,255,0.75);font-size:0.9rem;"></p>
+            <span id="dashboard-class" style="background:rgba(255,255,255,0.15);color:white;padding:0.2rem 0.75rem;border-radius:50px;font-size:0.78rem;font-weight:600;"></span>
+            <span id="last-active" style="color:rgba(255,255,255,0.6);font-size:0.78rem;margin-left:0.75rem;"></span>
+          </div>
+          <div style="margin-left:auto;">
+            <a href="quiz.html" class="btn btn-white btn-sm"><i class="fa-solid fa-question-circle"></i> Take a Quiz</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="padding-bottom:4rem;">
+
+      <!-- Stats Cards -->
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue"><span style="font-size:1.5rem;">📚</span></div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-lessons">0</div>
+            <div class="stat-label">Lessons Completed</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><span style="font-size:1.5rem;">🎯</span></div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-best-score">0%</div>
+            <div class="stat-label">Best Quiz Score</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber"><span style="font-size:1.5rem;">🎮</span></div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-activities">0</div>
+            <div class="stat-label">Activities Completed</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple"><span style="font-size:1.5rem;">🏆</span></div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-points">0</div>
+            <div class="stat-label">Learning Points</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue"><span style="font-size:1.5rem;">❓</span></div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-quizzes">0</div>
+            <div class="stat-label">Quizzes Taken</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><span style="font-size:1.5rem;">🌍</span></div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-subjects">0</div>
+            <div class="stat-label">Subjects Explored</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress & Results Grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;" class="dash-two-col">
+
+        <!-- Progress Section -->
+        <div class="progress-card">
+          <h3>📊 Learning Progress</h3>
+          <div class="progress-item">
+            <div class="progress-label">
+              <span>Overall Progress</span>
+              <span id="progress-overall-label">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill blue" id="progress-overall" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label">
+              <span>Quiz Performance</span>
+              <span id="progress-quiz-label">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill green" id="progress-quiz" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label">
+              <span>Lessons</span>
+              <span id="progress-lessons-label">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill amber" id="progress-lessons" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label">
+              <span>Activities</span>
+              <span id="progress-activities-label">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill purple" id="progress-activities" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label">
+              <span>Subjects Explored (5)</span>
+              <span id="progress-subjects-label">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill pink" id="progress-subjects" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Quiz Results -->
+        <div class="progress-card">
+          <h3 style="margin-bottom:1.25rem;">🎯 Recent Quiz Results</h3>
+          <div id="recent-results">
+            <div style="text-align:center;padding:2rem;color:var(--gray);">
+              <div class="spinner"></div>
+              <p style="margin-top:1rem;">Loading results...</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Subjects Explored -->
+      <div class="progress-card" style="margin-bottom:1.5rem;">
+        <h3 style="margin-bottom:1rem;">📚 Subjects Explored</h3>
+        <div id="subjects-explored">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="progress-card">
+        <h3 style="margin-bottom:1.25rem;">⚡ Quick Actions</h3>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="learning.html" class="btn btn-primary">
+            <i class="fa-solid fa-book-open"></i> Continue Learning
+          </a>
+          <a href="quiz.html" class="btn btn-outline">
+            <i class="fa-solid fa-question-circle"></i> Take a Quiz
+          </a>
+          <a href="activities.html" class="btn btn-secondary">
+            <i class="fa-solid fa-gamepad"></i> Play Activities
+          </a>
+          <a href="feedback.html" class="btn" style="background:var(--bg);color:var(--gray);border:1px solid var(--gray-light);">
+            <i class="fa-solid fa-comment"></i> Give Feedback
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER (minimal) -->
+  <footer style="padding:2rem 1.5rem;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+      <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;">© 2024 Udaan – CEP Project</p>
+      <div style="display:flex;gap:1.5rem;">
+        <a href="index.html" style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Home</a>
+        <a href="learning.html" style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Learn</a>
+        <a href="quiz.html" style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Quiz</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+  <style>
+    @media(max-width:768px) { .dash-two-col { grid-template-columns: 1fr !important; } }
+  </style>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Udaan – Free Learning & Support Platform</title>
+  <meta name="description" content="Udaan empowers children through education, creativity, activities and opportunities. A free learning platform by college CEP initiative." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
+        <span>Udaan</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+        <li><a href="learning.html" class="nav-link">📚 Learning Hub</a></li>
+        <li><a href="activities.html" class="nav-link">🎮 Activities</a></li>
+        <li><a href="quiz.html" class="nav-link">❓ Quiz</a></li>
+        <li><a href="ngo.html" class="nav-link">🌱 NGO Activity</a></li>
+        <li><a href="feedback.html" class="nav-link">💬 Feedback</a></li>
+        <li><a href="dashboard.html" class="nav-link d-none" id="nav-dashboard-link">👤 Dashboard</a></li>
+        <li><a href="#" class="nav-link d-none" id="nav-logout-link" onclick="logout(); return false;">🚪 Logout</a></li>
+        <li><a href="login.html" class="nav-link btn-login" id="nav-login-link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero">
+    <div class="hero-content">
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <div class="hero-badge">
+          <i class="fa-solid fa-star"></i> Free CEP Learning Platform
+        </div>
+        <h1 class="hero-title">
+          Every Child Deserves a
+          <span class="highlight">Chance to Learn.</span>
+        </h1>
+        <p class="hero-desc">
+          Udaan empowers children through education, creativity, activities and opportunities.
+          Join us on a journey of knowledge and discovery.
+        </p>
+        <div class="hero-btns">
+          <a href="learning.html" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-book-open"></i> Start Learning
+          </a>
+          <a href="activities.html" class="btn btn-secondary btn-lg">
+            <i class="fa-solid fa-gamepad"></i> Explore Activities
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="number">5+</span>
+            <span class="label">Subjects</span>
+          </div>
+          <div class="hero-stat">
+            <span class="number">25+</span>
+            <span class="label">Quiz Questions</span>
+          </div>
+          <div class="hero-stat">
+            <span class="number">4</span>
+            <span class="label">Activities</span>
+          </div>
+          <div class="hero-stat">
+            <span class="number">100%</span>
+            <span class="label">Free</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Illustration -->
+      <div class="hero-illustration">
+        <div style="position:relative;">
+          <!-- SVG Educational Illustration -->
+          <svg width="480" height="400" viewBox="0 0 480 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background circle -->
+            <circle cx="240" cy="200" r="180" fill="#EFF6FF" opacity="0.8"/>
+            <!-- Book base -->
+            <rect x="100" y="180" width="280" height="160" rx="12" fill="#2563EB"/>
+            <rect x="240" y="180" width="140" height="160" rx="12" fill="#1d4ed8"/>
+            <!-- Book spine -->
+            <rect x="232" y="175" width="16" height="170" rx="6" fill="#FACC15"/>
+            <!-- Book pages -->
+            <rect x="115" y="195" width="110" height="8" rx="4" fill="white" opacity="0.6"/>
+            <rect x="115" y="213" width="90" height="6" rx="3" fill="white" opacity="0.4"/>
+            <rect x="115" y="228" width="100" height="6" rx="3" fill="white" opacity="0.4"/>
+            <rect x="115" y="243" width="80" height="6" rx="3" fill="white" opacity="0.4"/>
+            <rect x="255" y="195" width="110" height="8" rx="4" fill="white" opacity="0.6"/>
+            <rect x="255" y="213" width="90" height="6" rx="3" fill="white" opacity="0.4"/>
+            <rect x="255" y="228" width="100" height="6" rx="3" fill="white" opacity="0.4"/>
+            <!-- Star decorations -->
+            <circle cx="150" cy="120" r="18" fill="#FACC15"/>
+            <text x="143" y="127" font-size="18">⭐</text>
+            <circle cx="340" cy="100" r="14" fill="#10B981"/>
+            <text x="332" y="107" font-size="14">✏️</text>
+            <circle cx="380" cy="230" r="16" fill="#F59E0B"/>
+            <text x="372" y="237" font-size="16">🎯</text>
+            <circle cx="100" cy="280" r="14" fill="#8B5CF6"/>
+            <text x="92" y="287" font-size="14">💡</text>
+            <!-- Graduation cap -->
+            <rect x="175" y="100" width="130" height="70" rx="10" fill="#1E293B"/>
+            <rect x="205" y="80" width="70" height="30" rx="8" fill="#2563EB"/>
+            <circle cx="240" cy="95" r="25" fill="#2563EB"/>
+            <rect x="220" y="68" width="40" height="8" rx="4" fill="#FACC15"/>
+            <text x="218" y="110" font-size="30">🎓</text>
+            <!-- Floating elements -->
+            <circle cx="70" cy="160" r="30" fill="#ECFDF5" opacity="0.8"/>
+            <text x="58" y="170" font-size="22">📚</text>
+            <circle cx="390" cy="310" r="28" fill="#FDF2F8" opacity="0.8"/>
+            <text x="379" y="321" font-size="22">🌟</text>
+            <!-- Math symbols -->
+            <text x="55" y="240" font-size="24" fill="#2563EB" opacity="0.5">+</text>
+            <text x="400" y="170" font-size="24" fill="#10B981" opacity="0.5">×</text>
+            <text x="55" y="320" font-size="24" fill="#F59E0B" opacity="0.5">=</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHY UDAAN ===================== -->
+  <section class="why-udaan">
+    <div class="container">
+      <h2 class="section-title">Why <span class="gradient-text">Udaan?</span></h2>
+      <p class="section-subtitle">A platform designed to make learning fun, accessible and engaging for every child.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">📚</span>
+          <h3>Learn</h3>
+          <p>Fun and easy learning resources across five key subjects, designed for school-age children.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎯</span>
+          <h3>Practice</h3>
+          <p>Interactive practice activities including word puzzles, math challenges and memory games.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">💡</span>
+          <h3>Explore</h3>
+          <p>Encourage curiosity and creativity through fun educational content and quizzes.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🌱</span>
+          <h3>Grow</h3>
+          <p>Build confidence and knowledge through tracked progress and achievement milestones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SUBJECTS ===================== -->
+  <section class="subjects">
+    <div class="container">
+      <h2 class="section-title">Learning <span class="gradient-text">Subjects</span></h2>
+      <p class="section-subtitle">Choose from five subjects carefully selected for children's holistic development.</p>
+
+      <div class="subjects-grid">
+        <a href="learning.html#english" class="subject-card english">
+          <span class="subject-icon">📖</span>
+          <h3>English</h3>
+          <p>Alphabet, Vocabulary, Grammar & Sentences</p>
+        </a>
+        <a href="learning.html#mathematics" class="subject-card math">
+          <span class="subject-icon">🔢</span>
+          <h3>Mathematics</h3>
+          <p>Addition, Subtraction, Multiplication & Division</p>
+        </a>
+        <a href="learning.html#science" class="subject-card science">
+          <span class="subject-icon">🔬</span>
+          <h3>Science</h3>
+          <p>Human Body, Plants, Animals & Environment</p>
+        </a>
+        <a href="learning.html#gk" class="subject-card gk">
+          <span class="subject-icon">🌍</span>
+          <h3>General Knowledge</h3>
+          <p>India, World, Sports & Important Facts</p>
+        </a>
+        <a href="learning.html#computer" class="subject-card computer">
+          <span class="subject-icon">💻</span>
+          <h3>Computer Basics</h3>
+          <p>Introduction, Keyboard, Mouse & Internet Safety</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+      <p class="section-subtitle">Learning on Udaan is simple, fun and rewarding in just 5 easy steps.</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Choose a Subject</h3>
+          <p>Pick from English, Maths, Science, GK or Computer Basics.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Learn</h3>
+          <p>Read easy-to-understand lesson content with examples.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Practice</h3>
+          <p>Complete fun activities like puzzles, challenges and games.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Take a Quiz</h3>
+          <p>Test your knowledge with multiple-choice quiz questions.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">5</div>
+          <h3>Track Progress</h3>
+          <p>View your scores and learning journey in your dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NGO / COMMUNITY SECTION ===================== -->
+  <section class="community-section">
+    <div class="container">
+      <h2 class="section-title">Our Community <span style="color:#FACC15;">Initiative</span></h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.8);">
+        Udaan is part of a college Community Engagement Program (CEP) dedicated to bringing quality education to children through NGO partnerships.
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;">
+        <a href="ngo.html" class="btn btn-white">
+          <i class="fa-solid fa-heart"></i> View NGO Activity
+        </a>
+        <a href="about.html" class="btn btn-outline" style="border-color:white;color:white;">
+          <i class="fa-solid fa-info-circle"></i> Learn About Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🚀 Udaan</h3>
+        <p>A free educational platform created as part of a college Community Engagement Program (CEP) to support children through quality learning resources.</p>
+        <div class="footer-social" style="margin-top:1.25rem;">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Udaan</a></li>
+          <li><a href="learning.html">Learning Hub</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <ul>
+          <li><a href="learning.html#english">English</a></li>
+          <li><a href="learning.html#mathematics">Mathematics</a></li>
+          <li><a href="learning.html#science">Science</a></li>
+          <li><a href="learning.html#gk">General Knowledge</a></li>
+          <li><a href="learning.html#computer">Computer Basics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="ngo.html">NGO Activity</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Udaan – Free Learning & Support Platform. Made with ❤️ for children.</p>
+      <p>A College CEP Initiative</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

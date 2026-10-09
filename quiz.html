@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz – Udaan Learning Platform</title>
+  <meta name="description" content="Test your knowledge with Udaan's interactive MCQ quiz. Choose a subject and answer questions on English, Maths, Science, GK or Computer Basics." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
+        <span>Udaan</span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+        <li><a href="learning.html" class="nav-link">📚 Learning Hub</a></li>
+        <li><a href="activities.html" class="nav-link">🎮 Activities</a></li>
+        <li><a href="quiz.html" class="nav-link">❓ Quiz</a></li>
+        <li><a href="ngo.html" class="nav-link">🌱 NGO Activity</a></li>
+        <li><a href="feedback.html" class="nav-link">💬 Feedback</a></li>
+        <li><a href="dashboard.html" class="nav-link d-none" id="nav-dashboard-link">👤 Dashboard</a></li>
+        <li><a href="#" class="nav-link d-none" id="nav-logout-link" onclick="logout(); return false;">🚪 Logout</a></li>
+        <li><a href="login.html" class="nav-link btn-login" id="nav-login-link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>❓ Quiz <span style="color:#FACC15;">Time!</span></h1>
+      <p>Select a subject and test your knowledge. Answer all questions and see your score!</p>
+    </div>
+  </section>
+
+  <!-- QUIZ SECTION -->
+  <section style="padding:4rem 0;background:var(--bg);">
+    <div class="quiz-container">
+
+      <!-- Subject Selector -->
+      <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1.25rem;text-align:center;">
+        Choose Your Subject
+      </h2>
+      <div class="subject-selector">
+        <button class="subject-btn" data-subject="English" id="btn-English">
+          <span style="font-size:1.5rem;">📖</span>
+          <span>English</span>
+        </button>
+        <button class="subject-btn" data-subject="Mathematics" id="btn-Mathematics">
+          <span style="font-size:1.5rem;">🔢</span>
+          <span>Mathematics</span>
+        </button>
+        <button class="subject-btn" data-subject="Science" id="btn-Science">
+          <span style="font-size:1.5rem;">🔬</span>
+          <span>Science</span>
+        </button>
+        <button class="subject-btn" data-subject="General Knowledge" id="btn-General-Knowledge">
+          <span style="font-size:1.5rem;">🌍</span>
+          <span>GK</span>
+        </button>
+        <button class="subject-btn" data-subject="Computer Basics" id="btn-Computer-Basics">
+          <span style="font-size:1.5rem;">💻</span>
+          <span>Computer</span>
+        </button>
+      </div>
+
+      <!-- Loading indicator -->
+      <div id="quiz-loading" style="display:none;text-align:center;padding:2rem;">
+        <div class="spinner"></div>
+        <p style="margin-top:1rem;color:var(--gray);">Loading questions...</p>
+      </div>
+
+      <!-- Intro Message -->
+      <div id="quiz-intro" style="display:none;">
+        <!-- Shown after subject selected but before first question -->
+      </div>
+
+      <!-- Quiz Card -->
+      <div id="quiz-area" style="display:none;">
+        <div class="quiz-card">
+          <!-- Header -->
+          <div class="quiz-header">
+            <span id="quiz-counter" style="font-weight:600;color:var(--gray);font-size:0.9rem;"></span>
+            <span id="quiz-subject-badge" class="badge badge-blue"></span>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quiz-progress-fill" style="width:20%;"></div>
+          </div>
+
+          <!-- Question -->
+          <p class="quiz-question" id="quiz-question-text"></p>
+
+          <!-- Options -->
+          <div class="quiz-options" id="quiz-options"></div>
+
+          <!-- Navigation -->
+          <div class="quiz-nav">
+            <button class="btn btn-outline btn-sm" id="prev-btn" disabled>
+              <i class="fa-solid fa-chevron-left"></i> Previous
+            </button>
+            <button class="btn btn-primary btn-sm" id="next-btn">
+              Next <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <button class="btn btn-success btn-sm" id="submit-btn" style="display:none;">
+              <i class="fa-solid fa-check"></i> Submit Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz Result -->
+      <div id="quiz-result" style="display:none;"></div>
+
+      <!-- Intro Tips (always shown on page load) -->
+      <div id="quiz-tips" style="margin-top:2rem;">
+        <div class="quiz-card" style="padding:2rem;">
+          <h3 style="margin-bottom:1rem;text-align:center;">📋 How the Quiz Works</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+              <span style="font-size:1.5rem;">1️⃣</span>
+              <div><strong>Select a Subject</strong><p style="font-size:0.85rem;color:var(--gray);">Choose from 5 subjects above.</p></div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+              <span style="font-size:1.5rem;">2️⃣</span>
+              <div><strong>Answer Questions</strong><p style="font-size:0.85rem;color:var(--gray);">Click the option you think is correct.</p></div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+              <span style="font-size:1.5rem;">3️⃣</span>
+              <div><strong>Navigate</strong><p style="font-size:0.85rem;color:var(--gray);">Use Previous/Next to move between questions.</p></div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+              <span style="font-size:1.5rem;">4️⃣</span>
+              <div><strong>Submit & Score</strong><p style="font-size:0.85rem;color:var(--gray);">Submit to see your score and feedback.</p></div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:1.5rem;">
+            <p style="color:var(--gray);font-size:0.88rem;">💡 Login to save your quiz scores to your dashboard!</p>
+            <a href="register.html" class="btn btn-primary btn-sm" style="margin-top:0.75rem;">Register to Track Progress</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🚀 Udaan</h3>
+        <p>A free educational platform created for children through a college CEP initiative.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="learning.html">Learning Hub</a></li>
+          <li><a href="activities.html">Activities</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quiz Subjects</h4>
+        <ul>
+          <li><a href="quiz.html">English Quiz</a></li>
+          <li><a href="quiz.html">Mathematics Quiz</a></li>
+          <li><a href="quiz.html">Science Quiz</a></li>
+          <li><a href="quiz.html">GK Quiz</a></li>
+          <li><a href="quiz.html">Computer Quiz</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <ul>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Udaan – Free Learning & Support Platform. Made with ❤️ for children.</p>
+    </div>
+  </footer>
+
+  <button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+  <div id="toast-container"></div>
+  <script src="js/main.js"></script>
+  <script src="js/quiz.js"></script>
+  <script>
+    // Hide tips when quiz area is shown
+    const origLoadQuiz = loadQuiz;
+    // Override to also hide tips
+    window.loadQuiz = async function(subject) {
+      document.getElementById('quiz-tips').style.display = 'none';
+      await origLoadQuiz(subject);
+    };
+  </script>
+</body>
+</html>

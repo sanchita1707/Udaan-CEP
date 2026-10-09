@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – Udaan Learning Platform</title>
+  <meta name="description" content="Learn about Udaan – a community-focused educational platform created as part of a college CEP initiative to empower children through learning." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
+        <span>Udaan</span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+        <li><a href="learning.html" class="nav-link">📚 Learning Hub</a></li>
+        <li><a href="activities.html" class="nav-link">🎮 Activities</a></li>
+        <li><a href="quiz.html" class="nav-link">❓ Quiz</a></li>
+        <li><a href="ngo.html" class="nav-link">🌱 NGO Activity</a></li>
+        <li><a href="feedback.html" class="nav-link">💬 Feedback</a></li>
+        <li><a href="dashboard.html" class="nav-link d-none" id="nav-dashboard-link">👤 Dashboard</a></li>
+        <li><a href="#" class="nav-link d-none" id="nav-logout-link" onclick="logout(); return false;">🚪 Logout</a></li>
+        <li><a href="login.html" class="nav-link btn-login" id="nav-login-link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>About <span style="color:#FACC15;">Udaan</span></h1>
+      <p>Learn about our mission, vision and the community behind this educational initiative.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section style="padding:5rem 0;background:white;">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="hero-badge" style="margin-bottom:1rem;">
+            <i class="fa-solid fa-info-circle"></i> About Udaan
+          </div>
+          <h2 style="font-size:2rem;margin-bottom:1rem;">What is <span class="gradient-text">Udaan?</span></h2>
+          <p style="color:var(--gray);line-height:1.9;margin-bottom:1rem;">
+            <strong>Udaan</strong> is a community-focused educational web platform created as part of a <strong>Community Engagement Program (CEP)</strong> by B.Sc. Computer Science students. The platform is designed to support children from NGOs and underprivileged backgrounds by providing free access to quality educational resources.
+          </p>
+          <p style="color:var(--gray);line-height:1.9;margin-bottom:1.5rem;">
+            The name "Udaan" means <em>"flight"</em> in Hindi — symbolising the hope and opportunity that education gives every child to soar to new heights.
+          </p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="learning.html" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Start Learning</a>
+            <a href="ngo.html" class="btn btn-outline"><i class="fa-solid fa-heart"></i> NGO Activity</a>
+          </div>
+        </div>
+        <div>
+          <div style="background:linear-gradient(135deg,#EFF6FF,#F0FDF4);border-radius:var(--radius-xl);padding:2.5rem;text-align:center;">
+            <div style="font-size:5rem;margin-bottom:1rem;">🚀</div>
+            <h3 style="color:var(--primary);margin-bottom:0.75rem;">Udaan – Free & Open</h3>
+            <p style="color:var(--gray);font-size:0.92rem;line-height:1.8;">
+              Completely free for children. No registration required to explore. Learn at your own pace, anytime, anywhere.
+            </p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;">
+              <div style="background:white;border-radius:12px;padding:1rem;">
+                <div style="font-size:1.8rem;font-weight:800;color:var(--primary);">5+</div>
+                <div style="font-size:0.78rem;color:var(--gray);">Subjects</div>
+              </div>
+              <div style="background:white;border-radius:12px;padding:1rem;">
+                <div style="font-size:1.8rem;font-weight:800;color:var(--success);">25+</div>
+                <div style="font-size:0.78rem;color:var(--gray);">Quiz Questions</div>
+              </div>
+              <div style="background:white;border-radius:12px;padding:1rem;">
+                <div style="font-size:1.8rem;font-weight:800;color:var(--warning);">4</div>
+                <div style="font-size:0.78rem;color:var(--gray);">Fun Activities</div>
+              </div>
+              <div style="background:white;border-radius:12px;padding:1rem;">
+                <div style="font-size:1.8rem;font-weight:800;color:#8b5cf6;">100%</div>
+                <div style="font-size:0.78rem;color:var(--gray);">Free</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section style="padding:5rem 0;background:var(--bg);">
+    <div class="container">
+      <h2 class="section-title">Our Mission & <span class="gradient-text">Vision</span></h2>
+      <p class="section-subtitle">The values that guide everything we do at Udaan.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;" class="mv-grid">
+        <div style="background:linear-gradient(135deg,var(--primary),#7c3aed);color:white;border-radius:var(--radius-xl);padding:3rem;">
+          <div style="font-size:2.5rem;margin-bottom:1rem;">🎯</div>
+          <h3 style="color:white;font-size:1.4rem;margin-bottom:1rem;">Our Mission</h3>
+          <p style="color:rgba(255,255,255,0.85);line-height:1.8;font-size:1.05rem;">
+            "To make learning simple, accessible, interactive and enjoyable for every child, regardless of their background or resources."
+          </p>
+        </div>
+        <div style="background:linear-gradient(135deg,#10b981,#059669);color:white;border-radius:var(--radius-xl);padding:3rem;">
+          <div style="font-size:2.5rem;margin-bottom:1rem;">🌟</div>
+          <h3 style="color:white;font-size:1.4rem;margin-bottom:1rem;">Our Vision</h3>
+          <p style="color:rgba(255,255,255,0.85);line-height:1.8;font-size:1.05rem;">
+            "To encourage every child to learn, explore and grow with confidence, building a brighter and more educated community."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIVES -->
+  <section style="padding:5rem 0;background:white;">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2 style="font-size:2rem;margin-bottom:1.5rem;">Our <span class="gradient-text">Objectives</span></h2>
+          <ul class="objective-list">
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Provide simple and engaging educational resources for school-age children across multiple subjects.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Encourage children to learn through fun interactive activities like puzzles, memory games and math challenges.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Improve basic digital awareness and computer literacy through dedicated Computer Basics lessons.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Promote interactive learning through MCQ quizzes with immediate score feedback and progress tracking.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Support children from NGOs and community organisations through our College CEP initiative.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Maintain a safe, child-friendly and privacy-conscious educational environment at all times.</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 style="font-size:2rem;margin-bottom:1.5rem;">Our <span class="gradient-text">Journey</span></h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4>📋 Project Proposal</h4>
+              <p>Udaan was conceived as a CEP project to address educational gaps for underprivileged children.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background:var(--success);box-shadow:0 0 0 2px var(--success);"></div>
+              <h4>🎨 Design & Development</h4>
+              <p>The platform was designed and developed by B.Sc. Computer Science students using modern web technologies.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background:var(--warning);box-shadow:0 0 0 2px var(--warning);"></div>
+              <h4>🏫 NGO Partnership</h4>
+              <p>We partnered with a local NGO to conduct educational sessions and activities for children.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background:#8b5cf6;box-shadow:0 0 0 2px #8b5cf6;"></div>
+              <h4>🚀 Platform Launch</h4>
+              <p>Udaan was launched as a free educational platform available to children and community members.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background:var(--secondary);box-shadow:0 0 0 2px var(--secondary);"></div>
+              <h4>🌱 Ongoing Growth</h4>
+              <p>Continuing to add more content, activities and features to support children's learning journey.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section style="padding:5rem 0;background:linear-gradient(135deg,#EFF6FF,#F5F3FF);">
+    <div class="container">
+      <h2 class="section-title">Behind <span class="gradient-text">Udaan</span></h2>
+      <p class="section-subtitle">This platform is built and maintained by passionate B.Sc. Computer Science students.</p>
+      <div style="text-align:center;max-width:700px;margin:0 auto;">
+        <div style="background:white;border-radius:var(--radius-xl);padding:3rem;box-shadow:var(--shadow-md);">
+          <div style="font-size:4rem;margin-bottom:1rem;">👨‍💻👩‍💻</div>
+          <h3 style="margin-bottom:0.75rem;">B.Sc. Computer Science — CEP Team</h3>
+          <p style="color:var(--gray);line-height:1.8;">
+            Udaan is a Community Engagement Program (CEP) project. Our team consists of dedicated students who believe in the power of technology to make education accessible to every child in our community.
+          </p>
+          <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;">
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;margin:0 auto 0.5rem;">👩</div>
+              <div style="font-size:0.85rem;font-weight:600;">Frontend Dev</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;margin:0 auto 0.5rem;">👨</div>
+              <div style="font-size:0.85rem;font-weight:600;">Backend Dev</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;margin:0 auto 0.5rem;">👩</div>
+              <div style="font-size:0.85rem;font-weight:600;">Content Creator</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#6d28d9);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;margin:0 auto 0.5rem;">👨</div>
+              <div style="font-size:0.85rem;font-weight:600;">UI/UX Designer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🚀 Udaan</h3>
+        <p>A free educational platform created as part of a college Community Engagement Program (CEP) to support children through quality learning resources.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Udaan</a></li>
+          <li><a href="learning.html">Learning Hub</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <ul>
+          <li><a href="learning.html#english">English</a></li>
+          <li><a href="learning.html#mathematics">Mathematics</a></li>
+          <li><a href="learning.html#science">Science</a></li>
+          <li><a href="learning.html#gk">General Knowledge</a></li>
+          <li><a href="learning.html#computer">Computer Basics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="ngo.html">NGO Activity</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Udaan – Free Learning & Support Platform. Made with ❤️ for children.</p>
+      <p>A College CEP Initiative</p>
+    </div>
+  </footer>
+
+  <button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+  <div id="toast-container"></div>
+  <script src="js/main.js"></script>
+  <style>
+    @media(max-width:768px){.mv-grid{grid-template-columns:1fr !important;}}
+  </style>
+</body>
+</html>
