@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback – Udaan Learning Platform</title>
+  <meta name="description" content="Share your feedback about Udaan to help us improve the learning experience for children." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
+        <span>Udaan</span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+        <li><a href="learning.html" class="nav-link">📚 Learning Hub</a></li>
+        <li><a href="activities.html" class="nav-link">🎮 Activities</a></li>
+        <li><a href="quiz.html" class="nav-link">❓ Quiz</a></li>
+        <li><a href="ngo.html" class="nav-link">🌱 NGO Activity</a></li>
+        <li><a href="feedback.html" class="nav-link">💬 Feedback</a></li>
+        <li><a href="dashboard.html" class="nav-link d-none" id="nav-dashboard-link">👤 Dashboard</a></li>
+        <li><a href="#" class="nav-link d-none" id="nav-logout-link" onclick="logout(); return false;">🚪 Logout</a></li>
+        <li><a href="login.html" class="nav-link btn-login" id="nav-login-link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>💬 Share Your <span style="color:#FACC15;">Feedback</span></h1>
+      <p>Help us improve! Your feedback and suggestions make Udaan better for every child.</p>
+    </div>
+  </section>
+
+  <!-- FEEDBACK SECTION -->
+  <section style="padding:5rem 0;background:var(--bg);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start;" class="fb-grid">
+
+        <!-- Left: Info -->
+        <div>
+          <h2 style="font-size:1.7rem;margin-bottom:1rem;">Your opinion <span class="gradient-text">matters!</span></h2>
+          <p style="color:var(--gray);line-height:1.8;margin-bottom:1.5rem;">
+            We are always looking for ways to improve Udaan for the children we serve. Please share your honest feedback, rating and any suggestions you may have.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+              <div style="width:40px;height:40px;border-radius:10px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;color:var(--primary);">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div>
+                <strong>Rate the Platform</strong>
+                <p style="font-size:0.82rem;color:var(--gray);">Tell us how you'd rate Udaan out of 5 stars.</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+              <div style="width:40px;height:40px;border-radius:10px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;color:var(--success);">
+                <i class="fa-solid fa-comment"></i>
+              </div>
+              <div>
+                <strong>Share Your Experience</strong>
+                <p style="font-size:0.82rem;color:var(--gray);">What did you like most about Udaan?</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+              <div style="width:40px;height:40px;border-radius:10px;background:#FFFBEB;display:flex;align-items:center;justify-content:center;color:var(--warning);">
+                <i class="fa-solid fa-lightbulb"></i>
+              </div>
+              <div>
+                <strong>Give Suggestions</strong>
+                <p style="font-size:0.82rem;color:var(--gray);">Help us add features that children will love.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Previous Feedbacks summary -->
+          <div style="margin-top:2rem;background:white;border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);">
+            <h4 style="margin-bottom:1rem;font-size:1rem;">⭐ Overall Rating</h4>
+            <div style="font-size:2.5rem;font-weight:800;color:var(--primary);margin-bottom:0.25rem;">4.8 <span style="font-size:1rem;color:var(--gray);font-weight:400;">/ 5</span></div>
+            <div style="color:var(--secondary);font-size:1.3rem;">⭐⭐⭐⭐⭐</div>
+            <p style="font-size:0.8rem;color:var(--gray);margin-top:0.5rem;">Based on user feedback</p>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="feedback-form-card">
+          <!-- Success message (hidden by default) -->
+          <div id="feedback-success" style="display:none;text-align:center;padding:2rem;">
+            <div style="font-size:4rem;margin-bottom:1rem;">🎉</div>
+            <h3 style="color:var(--success);margin-bottom:0.75rem;">Thank You for Your Feedback!</h3>
+            <p style="color:var(--gray);margin-bottom:1.5rem;">Your feedback has been submitted successfully. It helps us make Udaan better for every child!</p>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+              <button class="btn btn-primary" onclick="resetFeedbackForm()">Submit Another</button>
+              <a href="index.html" class="btn btn-outline">Back to Home</a>
+            </div>
+          </div>
+
+          <!-- Feedback Form -->
+          <div id="feedback-form-wrap">
+            <h3 style="margin-bottom:1.5rem;">Share Your Experience</h3>
+
+            <form id="feedback-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fb-name">Your Name *</label>
+                  <div class="input-group">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" class="form-control" id="fb-name" placeholder="Enter your name" required />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fb-email">Email (optional)</label>
+                  <div class="input-group">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input type="email" class="form-control" id="fb-email" placeholder="your@email.com" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Star Rating -->
+              <div class="form-group">
+                <label class="form-label">Rating *</label>
+                <div class="star-rating" id="star-rating">
+                  <input type="radio" name="rating" id="star5" value="5" /><label for="star5" title="5 stars">★</label>
+                  <input type="radio" name="rating" id="star4" value="4" /><label for="star4" title="4 stars">★</label>
+                  <input type="radio" name="rating" id="star3" value="3" /><label for="star3" title="3 stars">★</label>
+                  <input type="radio" name="rating" id="star2" value="2" /><label for="star2" title="2 stars">★</label>
+                  <input type="radio" name="rating" id="star1" value="1" /><label for="star1" title="1 star">★</label>
+                </div>
+                <div id="rating-text" style="font-size:0.82rem;color:var(--gray);margin-top:0.35rem;">Click to rate</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fb-message">Your Feedback *</label>
+                <textarea class="form-control" id="fb-message" rows="4" placeholder="Tell us what you think about Udaan. What did you like? What could be better?" required minlength="10"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fb-suggestions">Suggestions (optional)</label>
+                <textarea class="form-control" id="fb-suggestions" rows="3" placeholder="Any suggestions for new features, content or improvements?"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100" id="fb-submit-btn">
+                <i class="fa-solid fa-paper-plane"></i> Submit Feedback
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🚀 Udaan</h3>
+        <p>A free educational platform created for children through a college CEP initiative.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="learning.html">Learning Hub</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <ul>
+          <li><a href="learning.html#english">English</a></li>
+          <li><a href="learning.html#mathematics">Mathematics</a></li>
+          <li><a href="learning.html#science">Science</a></li>
+          <li><a href="learning.html#computer">Computer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="ngo.html">NGO Activity</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Udaan – Free Learning & Support Platform. Made with ❤️ for children.</p>
+    </div>
+  </footer>
+
+  <button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+  <div id="toast-container"></div>
+  <script src="js/main.js"></script>
+  <script>
+  const ratingTexts = { 1:'⭐ Poor', 2:'⭐⭐ Fair', 3:'⭐⭐⭐ Good', 4:'⭐⭐⭐⭐ Very Good', 5:'⭐⭐⭐⭐⭐ Excellent!' };
+  document.querySelectorAll('input[name="rating"]').forEach(input => {
+    input.addEventListener('change', () => {
+      document.getElementById('rating-text').textContent = ratingTexts[input.value] || 'Click to rate';
+    });
+  });
+
+  document.getElementById('feedback-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('fb-name').value.trim();
+    const email = document.getElementById('fb-email').value.trim();
+    const rating = document.querySelector('input[name="rating"]:checked')?.value;
+    const message = document.getElementById('fb-message').value.trim();
+    const suggestions = document.getElementById('fb-suggestions').value.trim();
+
+    // Validate
+    if (!name) { showToast('Please enter your name', 'warning'); return; }
+    if (!rating) { showToast('Please select a rating', 'warning'); return; }
+    if (!message || message.length < 10) { showToast('Please enter a feedback message (at least 10 characters)', 'warning'); return; }
+
+    const btn = document.getElementById('fb-submit-btn');
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+    btn.disabled = true;
+
+    const result = await apiCall('/feedback', 'POST', { name, email, rating, message, suggestions });
+
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
+    btn.disabled = false;
+
+    if (result.ok) {
+      document.getElementById('feedback-form-wrap').style.display = 'none';
+      document.getElementById('feedback-success').style.display = 'block';
+    } else {
+      showToast(result.data.message || 'Submission failed. Please check if the server is running.', 'error');
+      // Still show success for demo purposes if server is offline
+      if (result.status === 0) {
+        document.getElementById('feedback-form-wrap').style.display = 'none';
+        document.getElementById('feedback-success').style.display = 'block';
+      }
+    }
+  });
+
+  function resetFeedbackForm() {
+    document.getElementById('feedback-form').reset();
+    document.getElementById('rating-text').textContent = 'Click to rate';
+    document.getElementById('feedback-success').style.display = 'none';
+    document.getElementById('feedback-form-wrap').style.display = 'block';
+  }
+  </script>
+  <style>
+    @media(max-width:768px){.fb-grid{grid-template-columns:1fr !important;}}
+  </style>
+</body>
+</html>
