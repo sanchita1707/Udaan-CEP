@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Hub – Udaan</title>
+  <meta name="description" content="Explore subjects like English, Mathematics, Science, General Knowledge and Computer Basics on Udaan's Learning Hub." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .topic-btn {
+      background: var(--bg);
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--dark);
+    }
+    .topic-btn:hover, .topic-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .lesson-content-box {
+      display: none;
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-top: 1rem;
+      border-left: 4px solid var(--primary);
+      box-shadow: var(--shadow-sm);
+      animation: slideDown 0.3s ease;
+    }
+    .lesson-content-box.active { display: block; }
+    .lesson-content-box h4 { color: var(--primary); margin-bottom: 0.75rem; }
+    .lesson-content-box p, .lesson-content-box li { color: var(--gray); line-height: 1.9; }
+    .lesson-content-box ul { padding-left: 1.5rem; list-style: disc; }
+    .example-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    .example-table th { background: var(--primary); color: white; padding: 0.6rem 1rem; text-align: left; }
+    .example-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--gray-light); }
+    .example-table tr:hover td { background: var(--bg); }
+    .highlight-box { background: linear-gradient(135deg, #EFF6FF, #F0FDF4); border-radius: 10px; padding: 1rem 1.25rem; margin: 0.75rem 0; font-size: 0.92rem; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
+        <span>Udaan</span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+        <li><a href="learning.html" class="nav-link">📚 Learning Hub</a></li>
+        <li><a href="activities.html" class="nav-link">🎮 Activities</a></li>
+        <li><a href="quiz.html" class="nav-link">❓ Quiz</a></li>
+        <li><a href="ngo.html" class="nav-link">🌱 NGO Activity</a></li>
+        <li><a href="feedback.html" class="nav-link">💬 Feedback</a></li>
+        <li><a href="dashboard.html" class="nav-link d-none" id="nav-dashboard-link">👤 Dashboard</a></li>
+        <li><a href="#" class="nav-link d-none" id="nav-logout-link" onclick="logout(); return false;">🚪 Logout</a></li>
+        <li><a href="login.html" class="nav-link btn-login" id="nav-login-link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>📚 Learning <span style="color:#FACC15;">Hub</span></h1>
+      <p>Explore lessons across five subjects designed for school-age children. Click Explore to start learning!</p>
+    </div>
+  </section>
+
+  <!-- SUBJECTS OVERVIEW -->
+  <section style="padding:4rem 0;background:var(--bg);">
+    <div class="container">
+      <div class="learning-grid" id="subjects-grid">
+
+        <!-- ENGLISH -->
+        <div class="learning-card" id="english">
+          <div class="learning-card-header">
+            <div class="learning-card-icon icon-blue">📖</div>
+            <div>
+              <h3 style="margin-bottom:0.2rem;">English</h3>
+              <span style="font-size:0.78rem;color:var(--gray);">Language & Communication</span>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <p>Master the English language with lessons on alphabet, vocabulary, grammar and sentence formation.</p>
+            <div class="lesson-tags">
+              <span class="lesson-tag">Alphabet</span>
+              <span class="lesson-tag">Vocabulary</span>
+              <span class="lesson-tag">Grammar</span>
+              <span class="lesson-tag">Sentences</span>
+            </div>
+            <!-- Topic Buttons -->
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+              <button class="topic-btn" onclick="showLesson('english','alphabet')">Alphabet</button>
+              <button class="topic-btn" onclick="showLesson('english','vocabulary')">Vocabulary</button>
+              <button class="topic-btn" onclick="showLesson('english','grammar')">Grammar</button>
+              <button class="topic-btn" onclick="showLesson('english','sentences')">Sentences</button>
+            </div>
+            <!-- Lesson Content -->
+            <div id="english-alphabet" class="lesson-content-box">
+              <h4>🔤 The English Alphabet</h4>
+              <p>The English alphabet has <strong>26 letters</strong>. These are divided into <strong>5 vowels</strong> and <strong>21 consonants</strong>.</p>
+              <div class="highlight-box"><strong>Vowels:</strong> A, E, I, O, U<br><strong>Consonants:</strong> All other 21 letters</div>
+              <p>Each letter has an uppercase (capital) and lowercase (small) form:</p>
+              <div class="highlight-box" style="font-size:1.1rem;letter-spacing:4px;text-align:center;">A B C D E F G H I J K L M<br>N O P Q R S T U V W X Y Z</div>
+            </div>
+            <div id="english-vocabulary" class="lesson-content-box">
+              <h4>📝 Basic Vocabulary</h4>
+              <p>Vocabulary means the collection of words you know. Let's learn some common words!</p>
+              <table class="example-table">
+                <tr><th>Word</th><th>Meaning</th><th>Example</th></tr>
+                <tr><td><strong>Happy</strong></td><td>Feeling joyful</td><td>The child is happy.</td></tr>
+                <tr><td><strong>Big</strong></td><td>Large in size</td><td>The elephant is big.</td></tr>
+                <tr><td><strong>Fast</strong></td><td>Moving quickly</td><td>The car is fast.</td></tr>
+                <tr><td><strong>Bright</strong></td><td>Full of light</td><td>The sun is bright.</td></tr>
+                <tr><td><strong>Kind</strong></td><td>Friendly & gentle</td><td>She is a kind person.</td></tr>
+              </table>
+            </div>
+            <div id="english-grammar" class="lesson-content-box">
+              <h4>📘 Basic Grammar</h4>
+              <p>Grammar helps us use words correctly to form proper sentences.</p>
+              <div class="highlight-box"><strong>Noun:</strong> Name of a person, place or thing. <em>Example: book, school, Rani</em></div>
+              <div class="highlight-box"><strong>Verb:</strong> Action word. <em>Example: run, eat, read, play</em></div>
+              <div class="highlight-box"><strong>Adjective:</strong> Describes a noun. <em>Example: big, red, tall, fast</em></div>
+              <div class="highlight-box"><strong>Pronoun:</strong> Used instead of a noun. <em>Example: he, she, they, it</em></div>
+            </div>
+            <div id="english-sentences" class="lesson-content-box">
+              <h4>✍️ Sentence Formation</h4>
+              <p>A sentence is a group of words that expresses a complete thought. It has a <strong>Subject</strong> and a <strong>Verb</strong>.</p>
+              <div class="highlight-box">Structure: <strong>Subject + Verb + Object</strong><br>Example: <em>The dog (subject) eats (verb) food (object).</em></div>
+              <ul>
+                <li>Every sentence starts with a <strong>capital letter</strong>.</li>
+                <li>Every sentence ends with a <strong>full stop (.), question mark (?) or exclamation mark (!)</strong>.</li>
+                <li>Example: <em>The girl reads a book.</em></li>
+                <li>Example: <em>Do you like mangoes?</em></li>
+              </ul>
+            </div>
+            <a href="quiz.html" class="btn btn-primary btn-sm w-100" onclick="trackProgress('subject',null,'English')">
+              <i class="fa-solid fa-question-circle"></i> Take English Quiz
+            </a>
+          </div>
+        </div>
+
+        <!-- MATHEMATICS -->
+        <div class="learning-card" id="mathematics">
+          <div class="learning-card-header">
+            <div class="learning-card-icon icon-green">🔢</div>
+            <div>
+              <h3 style="margin-bottom:0.2rem;">Mathematics</h3>
+              <span style="font-size:0.78rem;color:var(--gray);">Numbers & Operations</span>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <p>Learn the four basic operations of mathematics with simple examples and practice problems.</p>
+            <div class="lesson-tags">
+              <span class="lesson-tag">Addition</span>
+              <span class="lesson-tag">Subtraction</span>
+              <span class="lesson-tag">Multiplication</span>
+              <span class="lesson-tag">Division</span>
+            </div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+              <button class="topic-btn" onclick="showLesson('mathematics','addition')">Addition</button>
+              <button class="topic-btn" onclick="showLesson('mathematics','subtraction')">Subtraction</button>
+              <button class="topic-btn" onclick="showLesson('mathematics','multiplication')">Multiplication</button>
+              <button class="topic-btn" onclick="showLesson('mathematics','division')">Division</button>
+            </div>
+            <div id="mathematics-addition" class="lesson-content-box">
+              <h4>➕ Addition</h4>
+              <p>Addition means combining two or more numbers to get a bigger number. The symbol is <strong>+</strong>.</p>
+              <div class="highlight-box"><strong>Example:</strong> 5 + 3 = 8 | 12 + 7 = 19 | 25 + 14 = 39</div>
+              <p><strong>Steps:</strong></p>
+              <ul>
+                <li>Write numbers one below the other.</li>
+                <li>Start from the ones column (rightmost).</li>
+                <li>Add each column and carry over if needed.</li>
+              </ul>
+            </div>
+            <div id="mathematics-subtraction" class="lesson-content-box">
+              <h4>➖ Subtraction</h4>
+              <p>Subtraction means taking away a number from another. The symbol is <strong>−</strong>.</p>
+              <div class="highlight-box"><strong>Example:</strong> 9 − 4 = 5 | 20 − 8 = 12 | 50 − 23 = 27</div>
+              <ul>
+                <li>The larger number comes first.</li>
+                <li>Subtract the smaller number from the larger one.</li>
+                <li>Borrow from the next column if needed.</li>
+              </ul>
+            </div>
+            <div id="mathematics-multiplication" class="lesson-content-box">
+              <h4>✖️ Multiplication</h4>
+              <p>Multiplication is repeated addition. The symbol is <strong>×</strong> or <strong>*</strong>.</p>
+              <div class="highlight-box"><strong>Example:</strong> 3 × 4 = 12 (because 3+3+3+3 = 12)</div>
+              <table class="example-table">
+                <tr><th>×</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+                <tr><td><strong>2</strong></td><td>2</td><td>4</td><td>6</td><td>8</td><td>10</td></tr>
+                <tr><td><strong>3</strong></td><td>3</td><td>6</td><td>9</td><td>12</td><td>15</td></tr>
+                <tr><td><strong>5</strong></td><td>5</td><td>10</td><td>15</td><td>20</td><td>25</td></tr>
+              </table>
+            </div>
+            <div id="mathematics-division" class="lesson-content-box">
+              <h4>➗ Division</h4>
+              <p>Division means splitting a number into equal groups. The symbol is <strong>÷</strong>.</p>
+              <div class="highlight-box"><strong>Example:</strong> 12 ÷ 3 = 4 (12 split into 3 groups = 4 in each group)</div>
+              <ul>
+                <li>The number being divided is called the <strong>dividend</strong>.</li>
+                <li>The number dividing is called the <strong>divisor</strong>.</li>
+                <li>The answer is called the <strong>quotient</strong>.</li>
+              </ul>
+            </div>
+            <a href="quiz.html" class="btn btn-success btn-sm w-100" onclick="trackProgress('subject',null,'Mathematics')">
+              <i class="fa-solid fa-question-circle"></i> Take Maths Quiz
+            </a>
+          </div>
+        </div>
+
+        <!-- SCIENCE -->
+        <div class="learning-card" id="science">
+          <div class="learning-card-header">
+            <div class="learning-card-icon icon-amber">🔬</div>
+            <div>
+              <h3 style="margin-bottom:0.2rem;">Science</h3>
+              <span style="font-size:0.78rem;color:var(--gray);">Nature & Life</span>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <p>Discover the wonders of the natural world including the human body, plants, animals and environment.</p>
+            <div class="lesson-tags">
+              <span class="lesson-tag">Human Body</span>
+              <span class="lesson-tag">Plants</span>
+              <span class="lesson-tag">Animals</span>
+              <span class="lesson-tag">Environment</span>
+            </div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+              <button class="topic-btn" onclick="showLesson('science','body')">Human Body</button>
+              <button class="topic-btn" onclick="showLesson('science','plants')">Plants</button>
+              <button class="topic-btn" onclick="showLesson('science','animals')">Animals</button>
+              <button class="topic-btn" onclick="showLesson('science','environment')">Environment</button>
+            </div>
+            <div id="science-body" class="lesson-content-box">
+              <h4>🫀 The Human Body</h4>
+              <p>Our body has many important organs, each doing a special job.</p>
+              <table class="example-table">
+                <tr><th>Organ</th><th>Function</th></tr>
+                <tr><td>🫀 Heart</td><td>Pumps blood throughout the body</td></tr>
+                <tr><td>🫁 Lungs</td><td>Help us breathe in oxygen</td></tr>
+                <tr><td>🧠 Brain</td><td>Controls all body functions and thinking</td></tr>
+                <tr><td>👁️ Eyes</td><td>Help us see the world</td></tr>
+                <tr><td>🦷 Teeth</td><td>Help us chew and break down food</td></tr>
+              </table>
+            </div>
+            <div id="science-plants" class="lesson-content-box">
+              <h4>🌿 Plants</h4>
+              <p>Plants are living organisms that make their own food using sunlight, water and air.</p>
+              <div class="highlight-box">🌞 <strong>Photosynthesis:</strong> The process by which plants make food using sunlight, water (H₂O) and carbon dioxide (CO₂).</div>
+              <ul>
+                <li><strong>Roots:</strong> Absorb water and minerals from soil.</li>
+                <li><strong>Stem:</strong> Carries water and nutrients to all parts.</li>
+                <li><strong>Leaves:</strong> Make food through photosynthesis.</li>
+                <li><strong>Flowers:</strong> Help in reproduction of the plant.</li>
+              </ul>
+            </div>
+            <div id="science-animals" class="lesson-content-box">
+              <h4>🐾 Animals</h4>
+              <p>Animals are living beings that can move on their own and need food to survive.</p>
+              <table class="example-table">
+                <tr><th>Type</th><th>Examples</th><th>Feature</th></tr>
+                <tr><td>Mammals</td><td>Dog, Cat, Cow</td><td>Feed milk to young ones</td></tr>
+                <tr><td>Birds</td><td>Parrot, Eagle, Hen</td><td>Have wings and feathers</td></tr>
+                <tr><td>Reptiles</td><td>Snake, Lizard</td><td>Cold-blooded, have scales</td></tr>
+                <tr><td>Insects</td><td>Bee, Ant, Butterfly</td><td>Have 6 legs</td></tr>
+              </table>
+            </div>
+            <div id="science-environment" class="lesson-content-box">
+              <h4>🌍 Environment</h4>
+              <p>The environment includes everything around us — air, water, land, plants and animals.</p>
+              <div class="highlight-box">💚 We must protect our environment to keep our planet healthy!</div>
+              <ul>
+                <li>🌳 <strong>Plant trees</strong> to increase oxygen and reduce pollution.</li>
+                <li>💧 <strong>Save water</strong> by closing taps when not in use.</li>
+                <li>♻️ <strong>Reduce, Reuse, Recycle</strong> waste materials.</li>
+                <li>🚗 <strong>Avoid pollution</strong> by using cycles or public transport.</li>
+              </ul>
+            </div>
+            <a href="quiz.html" class="btn btn-secondary btn-sm w-100" onclick="trackProgress('subject',null,'Science')">
+              <i class="fa-solid fa-question-circle"></i> Take Science Quiz
+            </a>
+          </div>
+        </div>
+
+        <!-- GENERAL KNOWLEDGE -->
+        <div class="learning-card" id="gk">
+          <div class="learning-card-header">
+            <div class="learning-card-icon icon-purple">🌍</div>
+            <div>
+              <h3 style="margin-bottom:0.2rem;">General Knowledge</h3>
+              <span style="font-size:0.78rem;color:var(--gray);">World Awareness</span>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <p>Expand your awareness with fascinating facts about India, the world, sports and important events.</p>
+            <div class="lesson-tags">
+              <span class="lesson-tag">India</span>
+              <span class="lesson-tag">World</span>
+              <span class="lesson-tag">Sports</span>
+              <span class="lesson-tag">Facts</span>
+            </div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+              <button class="topic-btn" onclick="showLesson('gk','india')">India</button>
+              <button class="topic-btn" onclick="showLesson('gk','world')">World</button>
+              <button class="topic-btn" onclick="showLesson('gk','sports')">Sports</button>
+              <button class="topic-btn" onclick="showLesson('gk','facts')">Facts</button>
+            </div>
+            <div id="gk-india" class="lesson-content-box">
+              <h4>🇮🇳 India – Important Facts</h4>
+              <table class="example-table">
+                <tr><th>Topic</th><th>Fact</th></tr>
+                <tr><td>Capital</td><td>New Delhi</td></tr>
+                <tr><td>National Animal</td><td>Bengal Tiger 🐯</td></tr>
+                <tr><td>National Bird</td><td>Peacock 🦚</td></tr>
+                <tr><td>National Flower</td><td>Lotus 🪷</td></tr>
+                <tr><td>National Sport</td><td>Field Hockey 🏑</td></tr>
+                <tr><td>Independence Day</td><td>15th August</td></tr>
+                <tr><td>Republic Day</td><td>26th January</td></tr>
+                <tr><td>Father of Nation</td><td>Mahatma Gandhi</td></tr>
+              </table>
+            </div>
+            <div id="gk-world" class="lesson-content-box">
+              <h4>🌏 World Facts</h4>
+              <ul>
+                <li>🌍 The world has <strong>7 continents</strong> and <strong>5 oceans</strong>.</li>
+                <li>🏔️ Mount Everest is the <strong>highest mountain</strong> in the world.</li>
+                <li>🌊 Pacific Ocean is the <strong>largest ocean</strong> in the world.</li>
+                <li>🌵 Sahara is the <strong>largest hot desert</strong> in the world.</li>
+                <li>🇨🇳 China has the <strong>largest population</strong> in the world.</li>
+                <li>🇷🇺 Russia is the <strong>largest country</strong> by area.</li>
+              </ul>
+            </div>
+            <div id="gk-sports" class="lesson-content-box">
+              <h4>🏆 Sports Facts</h4>
+              <table class="example-table">
+                <tr><th>Sport</th><th>Special Term</th></tr>
+                <tr><td>Cricket 🏏</td><td>Century (100 runs)</td></tr>
+                <tr><td>Football ⚽</td><td>Hat-trick (3 goals)</td></tr>
+                <tr><td>Tennis 🎾</td><td>Love (zero points)</td></tr>
+                <tr><td>Boxing 🥊</td><td>Knockout (KO)</td></tr>
+                <tr><td>Chess ♟️</td><td>Checkmate (winning move)</td></tr>
+              </table>
+            </div>
+            <div id="gk-facts" class="lesson-content-box">
+              <h4>💡 Amazing Facts</h4>
+              <ul>
+                <li>🦋 Butterflies taste with their feet!</li>
+                <li>🐘 Elephants are the only animals that cannot jump.</li>
+                <li>⚡ Lightning strikes the Earth about 100 times every second.</li>
+                <li>🌙 The Moon has no air or water on its surface.</li>
+                <li>🐬 Dolphins sleep with one eye open.</li>
+                <li>🍯 Honey never spoils. Honey found in 3000-year-old Egyptian tombs was still edible!</li>
+              </ul>
+            </div>
+            <a href="quiz.html" class="btn btn-outline btn-sm w-100" onclick="trackProgress('subject',null,'General Knowledge')">
+              <i class="fa-solid fa-question-circle"></i> Take GK Quiz
+            </a>
+          </div>
+        </div>
+
+        <!-- COMPUTER BASICS -->
+        <div class="learning-card" id="computer">
+          <div class="learning-card-header">
+            <div class="learning-card-icon icon-pink">💻</div>
+            <div>
+              <h3 style="margin-bottom:0.2rem;">Computer Basics</h3>
+              <span style="font-size:0.78rem;color:var(--gray);">Digital Literacy</span>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <p>Learn fundamental computer skills including introduction, keyboard, mouse usage and internet safety.</p>
+            <div class="lesson-tags">
+              <span class="lesson-tag">Introduction</span>
+              <span class="lesson-tag">Keyboard</span>
+              <span class="lesson-tag">Mouse</span>
+              <span class="lesson-tag">Internet Safety</span>
+            </div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+              <button class="topic-btn" onclick="showLesson('computer','intro')">Introduction</button>
+              <button class="topic-btn" onclick="showLesson('computer','keyboard')">Keyboard</button>
+              <button class="topic-btn" onclick="showLesson('computer','mouse')">Mouse</button>
+              <button class="topic-btn" onclick="showLesson('computer','internet')">Internet Safety</button>
+            </div>
+            <div id="computer-intro" class="lesson-content-box">
+              <h4>🖥️ What is a Computer?</h4>
+              <p>A computer is an electronic device that can store, process and retrieve information. It helps us do many tasks quickly.</p>
+              <table class="example-table">
+                <tr><th>Part</th><th>Full Form</th><th>Purpose</th></tr>
+                <tr><td>CPU</td><td>Central Processing Unit</td><td>Brain of the computer</td></tr>
+                <tr><td>RAM</td><td>Random Access Memory</td><td>Temporary memory (working space)</td></tr>
+                <tr><td>HDD/SSD</td><td>Hard Disk Drive / Solid State Drive</td><td>Permanent storage</td></tr>
+                <tr><td>Monitor</td><td>—</td><td>Display screen (output device)</td></tr>
+              </table>
+            </div>
+            <div id="computer-keyboard" class="lesson-content-box">
+              <h4>⌨️ Using the Keyboard</h4>
+              <p>The keyboard is an input device used to type letters, numbers and special characters.</p>
+              <table class="example-table">
+                <tr><th>Key</th><th>Purpose</th></tr>
+                <tr><td>Enter / Return</td><td>Move to next line or confirm action</td></tr>
+                <tr><td>Backspace</td><td>Delete character to the left</td></tr>
+                <tr><td>Delete</td><td>Delete character to the right</td></tr>
+                <tr><td>Caps Lock</td><td>Toggle capital/small letters</td></tr>
+                <tr><td>Ctrl + C</td><td>Copy selected text</td></tr>
+                <tr><td>Ctrl + V</td><td>Paste copied text</td></tr>
+                <tr><td>Ctrl + Z</td><td>Undo last action</td></tr>
+              </table>
+            </div>
+            <div id="computer-mouse" class="lesson-content-box">
+              <h4>🖱️ Using the Mouse</h4>
+              <p>The mouse is an input device that controls the cursor on the screen.</p>
+              <ul>
+                <li>🖱️ <strong>Left Click:</strong> Select or open an item.</li>
+                <li>🖱️ <strong>Right Click:</strong> Open a menu with options.</li>
+                <li>🖱️ <strong>Double Click:</strong> Open a file or program.</li>
+                <li>🖱️ <strong>Scroll Wheel:</strong> Scroll up or down on a page.</li>
+                <li>🖱️ <strong>Click and Drag:</strong> Move items on screen.</li>
+              </ul>
+            </div>
+            <div id="computer-internet" class="lesson-content-box">
+              <h4>🔒 Internet Safety Rules</h4>
+              <p>The internet is a great tool for learning. But we must use it safely!</p>
+              <div class="highlight-box" style="border-left:3px solid var(--success);">✅ <strong>Safe Rules to Remember:</strong></div>
+              <ul>
+                <li>🔒 Never share your <strong>name, address or phone number</strong> with strangers online.</li>
+                <li>🚫 Never talk to <strong>unknown people</strong> on the internet.</li>
+                <li>📢 Always tell a <strong>trusted adult</strong> if something makes you uncomfortable online.</li>
+                <li>🔑 Keep your <strong>passwords</strong> secret and strong.</li>
+                <li>⏰ Limit screen time — take breaks and go outside to play!</li>
+              </ul>
+            </div>
+            <a href="quiz.html" class="btn btn-primary btn-sm w-100" style="background:linear-gradient(135deg,#ec4899,#be185d);" onclick="trackProgress('subject',null,'Computer Basics')">
+              <i class="fa-solid fa-question-circle"></i> Take Computer Quiz
+            </a>
+          </div>
+        </div>
+
+      </div><!-- end learning-grid -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🚀 Udaan</h3>
+        <p>A free educational platform created as part of a college Community Engagement Program (CEP) to support children.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <ul>
+          <li><a href="#english">English</a></li>
+          <li><a href="#mathematics">Mathematics</a></li>
+          <li><a href="#science">Science</a></li>
+          <li><a href="#gk">General Knowledge</a></li>
+          <li><a href="#computer">Computer Basics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="ngo.html">NGO Activity</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Udaan – Free Learning & Support Platform. Made with ❤️ for children.</p>
+    </div>
+  </footer>
+
+  <button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+  <div id="toast-container"></div>
+  <script src="js/main.js"></script>
+  <script>
+    // Show/hide lesson content
+    function showLesson(subject, topic) {
+      // Hide all boxes for this subject
+      document.querySelectorAll(`[id^="${subject}-"]`).forEach(box => {
+        box.classList.remove('active');
+      });
+      // Remove active from all buttons in the same card
+      document.querySelectorAll(`#${subject} .topic-btn`).forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Show selected
+      const box = document.getElementById(`${subject}-${topic}`);
+      if (box) box.classList.add('active');
+
+      // Mark button active
+      event.target.classList.add('active');
+
+      // Track progress
+      trackProgress('lesson', topic, subject);
+
+      // Scroll to lesson
+      setTimeout(() => {
+        box?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+
+    // Auto-open section from URL hash
+    window.addEventListener('load', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        const el = document.getElementById(hash);
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }, 500);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – Udaan Learning Platform</title>
+  <meta name="description" content="Login to your Udaan account to track your learning progress, quiz scores and activities." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
+        <span>Udaan</span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+        <li><a href="learning.html" class="nav-link">📚 Learning Hub</a></li>
+        <li><a href="activities.html" class="nav-link">🎮 Activities</a></li>
+        <li><a href="quiz.html" class="nav-link">❓ Quiz</a></li>
+        <li><a href="ngo.html" class="nav-link">🌱 NGO Activity</a></li>
+        <li><a href="feedback.html" class="nav-link">💬 Feedback</a></li>
+        <li><a href="login.html" class="nav-link btn-login" id="nav-login-link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- AUTH SECTION -->
+  <section class="auth-section">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div style="font-size:3rem;margin-bottom:0.5rem;">🚀</div>
+        <h2>Welcome Back!</h2>
+        <p>Login to continue your learning journey on Udaan</p>
+      </div>
+
+      <!-- Error Alert -->
+      <div id="auth-error" class="alert alert-danger" style="display:none;">
+        <i class="fa-solid fa-circle-xmark"></i>
+        <span></span>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email Address</label>
+          <div class="input-group">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input
+              type="email"
+              class="form-control"
+              id="login-email"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <div class="input-group" style="position:relative;">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input
+              type="password"
+              class="form-control"
+              id="login-password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+            <button type="button" id="toggle-pass" style="position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gray);">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" style="margin-top:0.5rem;">
+          <i class="fa-solid fa-right-to-bracket"></i> Login
+        </button>
+      </form>
+
+      <!-- Divider -->
+      <div style="display:flex;align-items:center;gap:1rem;margin:1.5rem 0;">
+        <div style="flex:1;height:1px;background:var(--gray-light);"></div>
+        <span style="color:var(--gray);font-size:0.85rem;">or</span>
+        <div style="flex:1;height:1px;background:var(--gray-light);"></div>
+      </div>
+
+      <!-- Admin Login Note -->
+      <div style="background:#FFFBEB;border-radius:var(--radius);padding:0.85rem;margin-bottom:1rem;font-size:0.82rem;color:#92400E;border:1px solid #FDE68A;">
+        <i class="fa-solid fa-shield-halved"></i>
+        <strong>Admin?</strong> Use your admin credentials. The system will redirect you to the Admin Panel.
+      </div>
+
+      <p style="text-align:center;color:var(--gray);font-size:0.9rem;">
+        Don't have an account?
+        <a href="register.html" style="color:var(--primary);font-weight:600;">Register for Free</a>
+      </p>
+    </div>
+  </section>
+
+  <div id="toast-container"></div>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

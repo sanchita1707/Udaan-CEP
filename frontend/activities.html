@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activities – Udaan Learning Platform</title>
+  <meta name="description" content="Play fun educational activities on Udaan - Word Puzzle, Math Challenge, Memory Game and General Knowledge Quiz." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .activity-section { padding: 5rem 0; }
+    .activity-result { text-align:center; padding:1rem; font-weight:700; font-size:1.1rem; border-radius:10px; margin-top:1rem; }
+    .activity-result.correct { background:#ECFDF5; color:var(--success); }
+    .activity-result.wrong { background:#FEF2F2; color:var(--danger); }
+
+    /* Memory game specific */
+    .memory-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; max-width:320px; margin:1rem auto; }
+    .mem-card { width:70px; height:70px; perspective:600px; cursor:pointer; }
+    .mem-inner { width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform 0.5s; border-radius:10px; }
+    .mem-card.flipped .mem-inner { transform:rotateY(180deg); }
+    .mem-card.matched .mem-inner { transform:rotateY(180deg); }
+    .mem-front, .mem-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.8rem; border:2px solid; }
+    .mem-front { background:linear-gradient(135deg,#2563eb,#7c3aed); color:white; border-color:#2563eb; font-size:1.2rem; }
+    .mem-back { background:white; transform:rotateY(180deg); border-color:#e2e8f0; }
+    .mem-card.matched .mem-back { background:#ECFDF5; border-color:var(--success); }
+
+    /* Word puzzle */
+    .hint-word { display:flex; gap:4px; justify-content:center; margin:1rem 0; flex-wrap:wrap; }
+    .hint-char { width:36px; height:36px; border:2px solid; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; }
+    .hint-char.known { border-color:var(--success); background:#ECFDF5; color:var(--success); }
+    .hint-char.blank { border-color:var(--gray-light); color:transparent; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
+        <span>Udaan</span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+        <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+        <li><a href="learning.html" class="nav-link">📚 Learning Hub</a></li>
+        <li><a href="activities.html" class="nav-link">🎮 Activities</a></li>
+        <li><a href="quiz.html" class="nav-link">❓ Quiz</a></li>
+        <li><a href="ngo.html" class="nav-link">🌱 NGO Activity</a></li>
+        <li><a href="feedback.html" class="nav-link">💬 Feedback</a></li>
+        <li><a href="dashboard.html" class="nav-link d-none" id="nav-dashboard-link">👤 Dashboard</a></li>
+        <li><a href="#" class="nav-link d-none" id="nav-logout-link" onclick="logout(); return false;">🚪 Logout</a></li>
+        <li><a href="login.html" class="nav-link btn-login" id="nav-login-link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>🎮 Fun <span style="color:#FACC15;">Activities</span></h1>
+      <p>Learn through play! Try our interactive activities – Word Puzzle, Math Challenge, Memory Game and GK Questions.</p>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES GRID -->
+  <section class="activity-section">
+    <div class="container">
+      <div class="activities-grid">
+
+        <!-- ====== WORD PUZZLE ====== -->
+        <div class="activity-card" id="word-puzzle-card">
+          <div class="activity-header blue">
+            <i class="fa-solid fa-spell-check"></i>
+            <h3>Word Puzzle</h3>
+            <p>Guess the hidden word from the hint!</p>
+          </div>
+          <div class="activity-body">
+            <div class="activity-instruction">
+              💡 <strong>How to play:</strong> A scrambled word is shown. Unscramble it and type your answer. Press Check to verify!
+            </div>
+            <div class="score-display">
+              <span>Score</span>
+              <span class="score-val" id="wp-score">0</span>
+              <span>Round</span>
+              <span class="score-val" id="wp-round">1/5</span>
+            </div>
+            <div id="wp-game" style="display:none;">
+              <p style="font-size:0.85rem;color:var(--gray);text-align:center;margin-bottom:0.5rem;">Unscramble this word:</p>
+              <div style="background:var(--bg);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:1rem;">
+                <div style="font-size:2rem;font-weight:800;letter-spacing:6px;color:var(--primary);" id="wp-scrambled">---</div>
+                <div style="font-size:0.8rem;color:var(--gray);margin-top:0.5rem;" id="wp-hint"></div>
+              </div>
+              <div class="math-input-row">
+                <input type="text" class="form-control" id="wp-answer" placeholder="Type your answer..." style="text-transform:uppercase;" maxlength="20">
+                <button class="btn btn-primary" onclick="checkWordAnswer()">Check</button>
+              </div>
+              <div id="wp-result" style="display:none;"></div>
+            </div>
+            <div id="wp-start-area" style="text-align:center;">
+              <button class="btn btn-primary w-100" onclick="startWordPuzzle()">
+                <i class="fa-solid fa-play"></i> Start Puzzle
+              </button>
+            </div>
+            <div id="wp-finished" style="display:none;text-align:center;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">🎉</div>
+              <p style="font-weight:700;margin-bottom:1rem;">Puzzle Complete! Score: <span id="wp-final-score"></span>/5</p>
+              <button class="btn btn-primary" onclick="startWordPuzzle()">Play Again</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== MATH CHALLENGE ====== -->
+        <div class="activity-card" id="math-challenge-card">
+          <div class="activity-header green">
+            <i class="fa-solid fa-calculator"></i>
+            <h3>Math Challenge</h3>
+            <p>Solve maths problems quickly!</p>
+          </div>
+          <div class="activity-body">
+            <div class="activity-instruction">
+              💡 <strong>How to play:</strong> Solve each maths problem. You have 10 seconds per question. Be fast!
+            </div>
+            <div class="score-display">
+              <span>Score</span>
+              <span class="score-val" id="mc-score">0</span>
+              <span id="mc-timer-display" style="font-weight:700;color:var(--danger);">⏱ 10s</span>
+            </div>
+            <div id="mc-game" style="display:none;">
+              <div class="math-problem" id="mc-problem">_ + _ = ?</div>
+              <div class="math-input-row">
+                <input type="number" class="form-control" id="mc-answer" placeholder="Answer" style="text-align:center;font-size:1.2rem;font-weight:700;">
+                <button class="btn btn-success" onclick="checkMathAnswer()">Submit</button>
+              </div>
+              <div id="mc-result" style="display:none;"></div>
+              <div style="margin-top:0.75rem;">
+                <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--gray);margin-bottom:0.25rem;">
+                  <span>Timer</span>
+                  <span id="mc-timer-text">10s</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill blue" id="mc-timer-bar" style="width:100%;transition:width 1s linear;"></div></div>
+              </div>
+            </div>
+            <div id="mc-start-area" style="text-align:center;">
+              <button class="btn btn-success w-100" onclick="startMathChallenge()">
+                <i class="fa-solid fa-play"></i> Start Challenge
+              </button>
+            </div>
+            <div id="mc-finished" style="display:none;text-align:center;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">🏆</div>
+              <p style="font-weight:700;margin-bottom:0.5rem;">Challenge Complete!</p>
+              <p style="margin-bottom:1rem;">Final Score: <span id="mc-final-score" style="color:var(--primary);font-weight:800;font-size:1.2rem;"></span></p>
+              <button class="btn btn-success" onclick="startMathChallenge()">Try Again</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== MEMORY GAME ====== -->
+        <div class="activity-card" id="memory-game-card">
+          <div class="activity-header amber">
+            <i class="fa-solid fa-brain"></i>
+            <h3>Memory Game</h3>
+            <p>Match the pairs to win!</p>
+          </div>
+          <div class="activity-body">
+            <div class="activity-instruction">
+              💡 <strong>How to play:</strong> Click cards to flip them. Match all emoji pairs to complete the game!
+            </div>
+            <div class="score-display">
+              <span>Moves</span>
+              <span class="score-val" id="mg-moves">0</span>
+              <span>Matched</span>
+              <span class="score-val" id="mg-matched">0/8</span>
+            </div>
+            <div id="mg-game" style="display:none;">
+              <div class="memory-grid" id="mg-grid"></div>
+            </div>
+            <div id="mg-start-area" style="text-align:center;">
+              <button class="btn btn-secondary w-100" onclick="startMemoryGame()">
+                <i class="fa-solid fa-play"></i> Start Memory Game
+              </button>
+            </div>
+            <div id="mg-finished" style="display:none;text-align:center;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">🎊</div>
+              <p style="font-weight:700;margin-bottom:0.25rem;">Amazing! You matched all pairs!</p>
+              <p style="color:var(--gray);margin-bottom:1rem;">Completed in <strong id="mg-final-moves"></strong> moves.</p>
+              <button class="btn btn-secondary" onclick="startMemoryGame()">Play Again</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== GK QUIZ ====== -->
+        <div class="activity-card" id="gk-activity-card">
+          <div class="activity-header pink">
+            <i class="fa-solid fa-globe"></i>
+            <h3>General Knowledge</h3>
+            <p>Test your knowledge with fun GK questions!</p>
+          </div>
+          <div class="activity-body">
+            <div class="activity-instruction">
+              💡 <strong>How to play:</strong> Read each question and click the correct answer. See your final score!
+            </div>
+            <div class="score-display">
+              <span>Score</span>
+              <span class="score-val" id="gk-score">0</span>
+              <span>Question</span>
+              <span class="score-val" id="gk-qnum">1/5</span>
+            </div>
+            <div id="gk-game" style="display:none;">
+              <p style="font-weight:600;margin-bottom:1rem;" id="gk-question"></p>
+              <div id="gk-options" style="display:flex;flex-direction:column;gap:0.5rem;"></div>
+              <div id="gk-feedback" style="display:none;margin-top:0.75rem;border-radius:8px;padding:0.75rem;font-size:0.9rem;"></div>
+              <button class="btn btn-primary w-100" style="margin-top:1rem;" id="gk-next-btn" onclick="nextGKQuestion()" disabled>Next Question →</button>
+            </div>
+            <div id="gk-start-area" style="text-align:center;">
+              <button class="btn btn-primary w-100" style="background:linear-gradient(135deg,#ec4899,#be185d);" onclick="startGKActivity()">
+                <i class="fa-solid fa-play"></i> Start GK Activity
+              </button>
+            </div>
+            <div id="gk-finished" style="display:none;text-align:center;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">🌟</div>
+              <p style="font-weight:700;margin-bottom:0.25rem;">GK Activity Complete!</p>
+              <p style="color:var(--gray);margin-bottom:1rem;">Your Score: <strong id="gk-final-score" style="color:var(--primary);font-size:1.2rem;"></strong></p>
+              <button class="btn btn-primary" style="background:linear-gradient(135deg,#ec4899,#be185d);" onclick="startGKActivity()">Play Again</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end activities-grid -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🚀 Udaan</h3>
+        <p>A free educational platform created as part of a college CEP initiative to support children.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="learning.html">Learning Hub</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Activities</h4>
+        <ul>
+          <li><a href="#word-puzzle-card">Word Puzzle</a></li>
+          <li><a href="#math-challenge-card">Math Challenge</a></li>
+          <li><a href="#memory-game-card">Memory Game</a></li>
+          <li><a href="#gk-activity-card">GK Activity</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="ngo.html">NGO Activity</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Udaan – Free Learning & Support Platform. Made with ❤️ for children.</p>
+    </div>
+  </footer>
+
+  <button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+  <div id="toast-container"></div>
+  <script src="js/main.js"></script>
+  <script>
+  // ============================================================
+  // WORD PUZZLE ACTIVITY
+  // ============================================================
+  const wpWords = [
+    { word: 'APPLE', hint: '🍎 A red or green fruit' },
+    { word: 'SCHOOL', hint: '🏫 Place where children study' },
+    { word: 'WATER', hint: '💧 We drink this to stay healthy' },
+    { word: 'BOOKS', hint: '📚 We read these to learn' },
+    { word: 'TIGER', hint: '🐯 National animal of India' },
+  ];
+  let wpIndex = 0, wpScore = 0;
+
+  function scramble(word) {
+    return word.split('').sort(() => Math.random() - 0.5).join('');
+  }
+
+  function startWordPuzzle() {
+    wpIndex = 0; wpScore = 0;
+    document.getElementById('wp-score').textContent = 0;
+    document.getElementById('wp-start-area').style.display = 'none';
+    document.getElementById('wp-finished').style.display = 'none';
+    document.getElementById('wp-game').style.display = 'block';
+    document.getElementById('wp-result').style.display = 'none';
+    loadWPWord();
+  }
+
+  function loadWPWord() {
+    const w = wpWords[wpIndex];
+    let scrambled = scramble(w.word);
+    // Ensure scrambled is different from original
+    while (scrambled === w.word) scrambled = scramble(w.word);
+    document.getElementById('wp-scrambled').textContent = scrambled;
+    document.getElementById('wp-hint').textContent = 'Hint: ' + w.hint;
+    document.getElementById('wp-round').textContent = `${wpIndex+1}/5`;
+    document.getElementById('wp-answer').value = '';
+    document.getElementById('wp-result').style.display = 'none';
+    document.getElementById('wp-answer').focus();
+  }
+
+  function checkWordAnswer() {
+    const answer = document.getElementById('wp-answer').value.trim().toUpperCase();
+    const correct = wpWords[wpIndex].word;
+    const resultEl = document.getElementById('wp-result');
+    resultEl.style.display = 'block';
+    if (answer === correct) {
+      wpScore++;
+      document.getElementById('wp-score').textContent = wpScore;
+      resultEl.innerHTML = `<div class="activity-result correct">✅ Correct! The word is "${correct}"</div>`;
+    } else {
+      resultEl.innerHTML = `<div class="activity-result wrong">❌ Wrong! The correct answer was "${correct}"</div>`;
+    }
+    wpIndex++;
+    setTimeout(() => {
+      if (wpIndex < wpWords.length) {
+        loadWPWord();
+      } else {
+        document.getElementById('wp-game').style.display = 'none';
+        document.getElementById('wp-final-score').textContent = wpScore;
+        document.getElementById('wp-finished').style.display = 'block';
+        trackProgress('activity', 'Word Puzzle');
+        showToast('Word Puzzle completed! 🎉', 'success');
+      }
+    }, 1800);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('wp-answer')?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') checkWordAnswer();
+    });
+  });
+
+  // ============================================================
+  // MATH CHALLENGE ACTIVITY
+  // ============================================================
+  let mcScore = 0, mcTimer = null, mcTimeLeft = 10, mcTotal = 0;
+  const mcQuestions = [
+    { q: '7 + 8 = ?', a: 15 }, { q: '15 − 6 = ?', a: 9 },
+    { q: '4 × 6 = ?', a: 24 }, { q: '20 ÷ 4 = ?', a: 5 },
+    { q: '13 + 9 = ?', a: 22 }, { q: '25 − 8 = ?', a: 17 },
+    { q: '3 × 9 = ?', a: 27 }, { q: '36 ÷ 6 = ?', a: 6 },
+    { q: '18 + 15 = ?', a: 33 }, { q: '50 − 23 = ?', a: 27 },
+  ];
+
+  function startMathChallenge() {
+    mcScore = 0; mcTotal = 0;
+    document.getElementById('mc-score').textContent = 0;
+    document.getElementById('mc-start-area').style.display = 'none';
+    document.getElementById('mc-finished').style.display = 'none';
+    document.getElementById('mc-game').style.display = 'block';
+    loadMCQuestion();
+  }
+
+  function loadMCQuestion() {
+    if (mcTotal >= mcQuestions.length) {
+      endMathChallenge(); return;
+    }
+    clearInterval(mcTimer);
+    mcTimeLeft = 10;
+    const q = mcQuestions[mcTotal];
+    document.getElementById('mc-problem').textContent = q.q;
+    document.getElementById('mc-answer').value = '';
+    document.getElementById('mc-result').style.display = 'none';
+    document.getElementById('mc-answer').focus();
+    updateTimerDisplay();
+    mcTimer = setInterval(() => {
+      mcTimeLeft--;
+      updateTimerDisplay();
+      if (mcTimeLeft <= 0) {
+        clearInterval(mcTimer);
+        showMCResult(false, q.a);
+        mcTotal++;
+        setTimeout(loadMCQuestion, 1500);
+      }
+    }, 1000);
+  }
+
+  function updateTimerDisplay() {
+    document.getElementById('mc-timer-text').textContent = `${mcTimeLeft}s`;
+    document.getElementById('mc-timer-display').textContent = `⏱ ${mcTimeLeft}s`;
+    document.getElementById('mc-timer-bar').style.width = `${(mcTimeLeft/10)*100}%`;
+  }
+
+  function checkMathAnswer() {
+    clearInterval(mcTimer);
+    const ans = parseInt(document.getElementById('mc-answer').value);
+    const correct = mcQuestions[mcTotal].a;
+    const isRight = ans === correct;
+    if (isRight) { mcScore++; document.getElementById('mc-score').textContent = mcScore; }
+    showMCResult(isRight, correct);
+    mcTotal++;
+    setTimeout(loadMCQuestion, 1500);
+  }
+
+  function showMCResult(correct, ans) {
+    const el = document.getElementById('mc-result');
+    el.style.display = 'block';
+    el.innerHTML = correct
+      ? `<div class="activity-result correct">✅ Correct!</div>`
+      : `<div class="activity-result wrong">❌ Wrong! Answer: ${ans}</div>`;
+  }
+
+  function endMathChallenge() {
+    document.getElementById('mc-game').style.display = 'none';
+    document.getElementById('mc-final-score').textContent = `${mcScore}/${mcQuestions.length}`;
+    document.getElementById('mc-finished').style.display = 'block';
+    trackProgress('activity', 'Math Challenge');
+    showToast('Math Challenge completed! 🏆', 'success');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('mc-answer')?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') checkMathAnswer();
+    });
+  });
+
+  // ============================================================
+  // MEMORY GAME ACTIVITY
+  // ============================================================
+  const memEmojis = ['🐶','🐱','🌸','⭐','🍎','🎈','📚','🚀'];
+  let memFlipped = [], memMatched = 0, memMoves = 0, memLocked = false;
+
+  function startMemoryGame() {
+    memFlipped = []; memMatched = 0; memMoves = 0; memLocked = false;
+    document.getElementById('mg-moves').textContent = 0;
+    document.getElementById('mg-matched').textContent = '0/8';
+    document.getElementById('mg-start-area').style.display = 'none';
+    document.getElementById('mg-finished').style.display = 'none';
+    document.getElementById('mg-game').style.display = 'block';
+    renderMemoryGrid();
+  }
+
+  function renderMemoryGrid() {
+    const pairs = [...memEmojis, ...memEmojis].sort(() => Math.random() - 0.5);
+    const grid = document.getElementById('mg-grid');
+    grid.innerHTML = '';
+    pairs.forEach((emoji, i) => {
+      const card = document.createElement('div');
+      card.className = 'mem-card';
+      card.dataset.emoji = emoji;
+      card.dataset.idx = i;
+      card.innerHTML = `
+        <div class="mem-inner">
+          <div class="mem-front">?</div>
+          <div class="mem-back">${emoji}</div>
+        </div>`;
+      card.addEventListener('click', () => flipMemCard(card));
+      grid.appendChild(card);
+    });
+  }
+
+  function flipMemCard(card) {
+    if (memLocked || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+    card.classList.add('flipped');
+    memFlipped.push(card);
+    if (memFlipped.length === 2) {
+      memMoves++;
+      document.getElementById('mg-moves').textContent = memMoves;
+      memLocked = true;
+      setTimeout(checkMemMatch, 700);
+    }
+  }
+
+  function checkMemMatch() {
+    const [a, b] = memFlipped;
+    if (a.dataset.emoji === b.dataset.emoji) {
+      a.classList.add('matched'); b.classList.add('matched');
+      memMatched++;
+      document.getElementById('mg-matched').textContent = `${memMatched}/8`;
+      if (memMatched === 8) {
+        setTimeout(() => {
+          document.getElementById('mg-game').style.display = 'none';
+          document.getElementById('mg-final-moves').textContent = memMoves;
+          document.getElementById('mg-finished').style.display = 'block';
+          trackProgress('activity', 'Memory Game');
+          showToast('Memory Game completed! 🎊', 'success');
+        }, 500);
+      }
+    } else {
+      a.classList.remove('flipped');
+      b.classList.remove('flipped');
+    }
+    memFlipped = [];
+    memLocked = false;
+  }
+
+  // ============================================================
+  // GK ACTIVITY
+  // ============================================================
+  const gkQs = [
+    { q: 'What is the capital of India?', opts: ['Mumbai','Chennai','New Delhi','Kolkata'], a: 2 },
+    { q: 'What is the national animal of India?', opts: ['Lion','Tiger','Elephant','Deer'], a: 1 },
+    { q: 'How many days are there in a week?', opts: ['5','6','7','8'], a: 2 },
+    { q: 'Which planet is closest to the Sun?', opts: ['Earth','Venus','Mercury','Mars'], a: 2 },
+    { q: 'What does a caterpillar turn into?', opts: ['Bee','Spider','Butterfly','Dragonfly'], a: 2 },
+  ];
+  let gkIndex = 0, gkScore = 0, gkAnswered = false;
+
+  function startGKActivity() {
+    gkIndex = 0; gkScore = 0; gkAnswered = false;
+    document.getElementById('gk-score').textContent = 0;
+    document.getElementById('gk-start-area').style.display = 'none';
+    document.getElementById('gk-finished').style.display = 'none';
+    document.getElementById('gk-game').style.display = 'block';
+    loadGKQuestion();
+  }
+
+  function loadGKQuestion() {
+    gkAnswered = false;
+    const q = gkQs[gkIndex];
+    document.getElementById('gk-question').textContent = `${gkIndex+1}. ${q.q}`;
+    document.getElementById('gk-qnum').textContent = `${gkIndex+1}/5`;
+    document.getElementById('gk-feedback').style.display = 'none';
+    document.getElementById('gk-next-btn').disabled = true;
+    const opts = document.getElementById('gk-options');
+    opts.innerHTML = '';
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = `<span class="option-label">${['A','B','C','D'][i]}</span> ${opt}`;
+      btn.onclick = () => answerGK(i, btn, q);
+      opts.appendChild(btn);
+    });
+  }
+
+  function answerGK(idx, btn, q) {
+    if (gkAnswered) return;
+    gkAnswered = true;
+    document.querySelectorAll('#gk-options .option-btn').forEach(b => b.disabled = true);
+    const fb = document.getElementById('gk-feedback');
+    fb.style.display = 'block';
+    if (idx === q.a) {
+      gkScore++;
+      document.getElementById('gk-score').textContent = gkScore;
+      btn.classList.add('correct');
+      fb.innerHTML = '✅ Correct! Well done!';
+      fb.style.cssText = 'display:block;background:#ECFDF5;color:var(--success);border-radius:8px;padding:0.75rem;';
+    } else {
+      btn.classList.add('wrong');
+      document.querySelectorAll('#gk-options .option-btn')[q.a].classList.add('correct');
+      fb.innerHTML = `❌ Wrong! Correct answer: "${q.opts[q.a]}"`;
+      fb.style.cssText = 'display:block;background:#FEF2F2;color:var(--danger);border-radius:8px;padding:0.75rem;';
+    }
+    document.getElementById('gk-next-btn').disabled = false;
+    if (gkIndex === gkQs.length - 1) {
+      document.getElementById('gk-next-btn').textContent = 'See Results 🏁';
+    }
+  }
+
+  function nextGKQuestion() {
+    gkIndex++;
+    if (gkIndex < gkQs.length) {
+      loadGKQuestion();
+    } else {
+      document.getElementById('gk-game').style.display = 'none';
+      document.getElementById('gk-final-score').textContent = `${gkScore}/5`;
+      document.getElementById('gk-finished').style.display = 'block';
+      trackProgress('activity', 'GK Activity');
+      showToast('GK Activity completed! 🌟', 'success');
+    }
+  }
+  </script>
+</body>
+</html>
